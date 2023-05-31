@@ -1,6 +1,11 @@
+import sys
+
+sys.path.append('/home/rick/tiny-training/algorithm/quantize')
+sys.path.append('/home/rick/tiny-training/algorithm/core/utils')
+
 import torch
 import torch.nn.functional as F
-from .quantized_ops import to_pt, QuantizedAvgPool, QuantizedConv2d, QuantizedElementwise, QuantizedMbBlock
+from quantized_ops import to_pt, QuantizedAvgPool, QuantizedConv2d, QuantizedElementwise, QuantizedMbBlock
 
 QUANTIZED_GRADIENT = False
 ROUNDING = 'round'
@@ -47,7 +52,7 @@ class _QuantizedElementwiseAddFunc(torch.autograd.Function):
     @staticmethod
     def forward(ctx, x1, x2, zero_x1, zero_x2, zero_y, scale_x1, scale_x2, scale_y):
         # ensure x1 and x2 are int
-        x1 = x1.round()  
+        x1 = x1.round()
         x2 = x2.round()
         assert x1.shape == x2.shape
         ctx.save_for_backward(scale_x1, scale_x2, scale_y)
@@ -155,7 +160,7 @@ class _QuantizedConv2dFunc(torch.autograd.Function):
         else:
             grad_w = None
 
-        from core.utils.config import configs
+        from config import configs
         if configs.backward_config.quantize_gradient:  # perform per-channel quantization
             # quantize grad_x and grad_w
             from .quantize_helper import get_weight_scales
@@ -179,7 +184,7 @@ class QuantizedConv2dDiff(QuantizedConv2d):
         self.register_buffer('zero_x', to_pt(zero_x))
         # self.register_buffer('zero_w', to_pt(zero_w))
         self.register_buffer('zero_y', to_pt(zero_y))
-        from ..core.utils.config import configs
+        from config import configs
         if configs.backward_config.train_scale:
             print('Note: the scale is also trained...')
             self.register_parameter('effective_scale', torch.nn.Parameter(effective_scale))
@@ -229,4 +234,3 @@ class ScaledLinear(torch.nn.Linear):
             return cos_dist
         else:
             return super().forward(x)
-

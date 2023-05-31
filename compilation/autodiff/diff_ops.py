@@ -1,3 +1,6 @@
+import sys
+sys.path.append('/home/rick/tiny-training/compilation/autodiff')
+
 from pprint import pprint
 from pydoc import visiblename
 import numpy as np
@@ -37,9 +40,9 @@ from tvm.relay.op.transform import (
 )
 
 # import graphviz
-from .op2grad import register_gradient, GRAD_OP_MAP
-from .diff_ops_bakup import *
-from .diff_ops_bakup import _get_reduce_axis, _unreduce_expand
+from op2grad import register_gradient, GRAD_OP_MAP
+from diff_ops_bakup import *
+from diff_ops_bakup import _get_reduce_axis, _unreduce_expand
 
 # from graph_tools.visualize_call import visualize_call
 def check_call_info(call):

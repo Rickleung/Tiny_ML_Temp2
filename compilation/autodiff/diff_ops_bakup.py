@@ -1,3 +1,6 @@
+import sys
+sys.path.append('/home/rick/tiny-training/compilation/autodiff')
+
 from tvm.topi.nn.utils import get_pad_tuple
 from tvm.topi.utils import get_const_tuple
 from tvm.error import OpError
@@ -9,7 +12,7 @@ from tvm.relay.loops import while_loop
 from tvm.relay.op import nn as _nn
 
 # from tvm.relay.op.op import register_gradient
-from .op2grad import register_gradient
+from op2grad import register_gradient
 from tvm.relay.op.reduce import sum as _sum
 from tvm.relay.op.tensor import (
     cos,

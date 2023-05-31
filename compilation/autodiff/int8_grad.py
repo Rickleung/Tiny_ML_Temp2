@@ -1,3 +1,7 @@
+import sys
+sys.path.append('/home/rick/tiny-training/compilation/autodiff')
+
+
 import time
 from turtle import backward
 
@@ -32,7 +36,7 @@ from tvm.relay.op.transform import (
 from tvm.topi.nn.utils import get_pad_tuple
 from tvm.topi.utils import get_const_tuple
 
-from .op2grad import register_gradient, GRAD_OP_MAP
+from op2grad import register_gradient, GRAD_OP_MAP
 
 # from graph_tools.visualize_call import visualize_call, check_call_dtype, check_call_shape
 

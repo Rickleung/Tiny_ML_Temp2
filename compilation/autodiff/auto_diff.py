@@ -1,3 +1,8 @@
+import sys
+sys.path.append('/home/rick/tiny-training/compilation/autodiff')
+sys.path.append('/home/rick/tiny-training/compilation')
+
+
 import enum
 import time
 from pprint import pprint
@@ -17,7 +22,7 @@ import tvm
 from tvm import relay
 from tvm.relay import ExprFunctor, ExprMutator, ExprVisitor, Call
 
-from .diff_ops import (
+from diff_ops import (
     GRAD_OP_MAP,
     sparse_depth_wise_mcunetconv2d_grad,
     sparse_in_channel_mcunetconv2d_grad,
@@ -177,14 +182,14 @@ class AutoDiff(ExprVisitor):
             if call_op != "nn.mcuconv2d":
                 gs = grad_fn(call, grad_output)
             else:
-                from compilation.utils import convert_ir_var
+                from utils import convert_ir_var
 
                 attrs = call.attrs
                 from tvm.topi.utils import get_const_tuple
 
                 if self.op_idx in self.sparse_op_idx:
-                    from .diff_ops import sparse_mcunetconv2d_grad
-                    from .int8_grad import (
+                    from diff_ops import sparse_mcunetconv2d_grad
+                    from int8_grad import (
                         sparse_depth_wise_mcunetconv2d_int8grad,
                         sparse_in_channel_mcunetconv2d_int8grad,
                     )

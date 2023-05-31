@@ -1,10 +1,15 @@
 from logging import warning
 import torch
 
+import sys
+sys.path.append('/home/rick/tiny-training/compilation/autodiff')
+sys.path.append('/home/rick/tiny-training/compilation/ir_utils')
+sys.path.append('/home/rick/tiny-training/compilation/convert')
+
 import tvm
 from tvm import relay
-from .pth_utils import nn_seq_to_ir, nn_module_to_ir
-from ..autodiff.auto_diff import appending_loss, bias_only, compute_autodiff
+from pth_utils import nn_seq_to_ir, nn_module_to_ir
+from auto_diff import appending_loss, bias_only, compute_autodiff
 
 
 def pth_model_to_ir(model, input_res=(1, 3, 80, 80), num_classes=0):
@@ -116,7 +121,7 @@ def generated_backward_graph(mod, op_idx, method, sparse_bp_config=None, int8_bp
         return bwd_mod, bwd_names
     elif method == "sparse_bp":
         assert sparse_bp_config
-        from ..ir_utils import ir_scan_op
+        from general_func import ir_scan_op
 
         total_convs = ir_scan_op(mod["main"])["nn.mcuconv2d"]
         # build sparse bp config

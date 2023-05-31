@@ -1,7 +1,10 @@
 import os
 import os.path as osp
 import json
-from compilation.convert import (
+import sys
+sys.path.append('/home/rick/tiny-training/compilation')
+
+from convert import (
     build_quantized_mcunet,
     build_quantized_mbv2,
     build_quantized_proxyless,

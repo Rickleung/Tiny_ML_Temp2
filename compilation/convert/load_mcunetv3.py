@@ -1,14 +1,13 @@
+import sys
+sys.path.append('/home/rick/tiny-training/compilation/convert')
 import os, sys, os.path as osp
 import functools
-
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
-
 import tvm
 from tvm import relay
-
-from .mcunetv3_wrapper import (
+from mcunetv3_wrapper import (
     build_mcu_model,
     configs,
     load_config_from_file,
@@ -22,7 +21,7 @@ from .mcunetv3_wrapper import (
 
 
 def build_quantized_model(net_name="mbv2-w0.35", num_classes=10):
-    load_config_from_file("configs/transfer.yaml")
+    load_config_from_file("/home/rick/tiny-training/algorithm/configs/transfer.yaml")
     configs["net_config"]["net_name"] = net_name # "mbv2-w0.35"
     configs["net_config"]["mcu_head_type"] = "quantized"
 

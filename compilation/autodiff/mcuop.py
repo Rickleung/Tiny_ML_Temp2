@@ -1,5 +1,3 @@
-from site import venv
-
 import numpy as np
 
 import tvm

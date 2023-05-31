@@ -3,14 +3,17 @@ In this file, we implement our customized quantized intermediate format (json+we
 We provide functions to convert PyTorch models into the pickle format
 and also the method to build simulated quantized models from the pickle file
 """
+
+import sys
+sys.path.append('/home/rick/tiny-training/algorithm/quantize')
 import torch
 import torch.nn as nn
 import numpy as np
-from .quantized_ops import to_np, to_pt, USE_FP_SCALE
-from .quantized_ops_diff import QuantizedConv2dDiff as QuantizedConv2d
-from .quantized_ops_diff import QuantizedMbBlockDiff as QuantizedMbBlock
-from .quantized_ops_diff import QuantizedElementwiseDiff as QuantizedElementwise
-from .quantized_ops_diff import QuantizedAvgPoolDiff as QuantizedAvgPool
+from quantized_ops import to_np, to_pt, USE_FP_SCALE
+from quantized_ops_diff import QuantizedConv2dDiff as QuantizedConv2d
+from quantized_ops_diff import QuantizedMbBlockDiff as QuantizedMbBlock
+from quantized_ops_diff import QuantizedElementwiseDiff as QuantizedElementwise
+from quantized_ops_diff import QuantizedAvgPoolDiff as QuantizedAvgPool
 
 __all__ = ['build_quantized_network_from_cfg', 'get_effective_scale']
 

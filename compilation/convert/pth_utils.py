@@ -1,3 +1,7 @@
+import sys
+sys.path.append('/home/rick/tiny-training/compilation/autodiff')
+sys.path.append('/home/rick/tiny-training/compilation')
+sys.path.append('/home/rick/tiny-training/compilation/convert')
 import os, os.path as osp
 from copy import deepcopy
 import json
@@ -18,10 +22,10 @@ import tvm
 from tvm import relay, te
 from tvm.contrib import graph_executor
 
-from ..mod import mod_save, mod_load
-from ..autodiff.mcuop import *
+from mod import mod_save, mod_load
+from mcuop import *
 
-from .mcunetv3_wrapper import (
+from mcunetv3_wrapper import (
     QuantizedConv2dDiff,
     QuantizedMbBlockDiff,
     QuantizedAvgPoolDiff,

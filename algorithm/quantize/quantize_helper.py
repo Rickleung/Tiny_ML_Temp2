@@ -1,9 +1,13 @@
+import sys
+sys.path.append('/home/rick/tiny-training/algorithm/quantize')
+sys.path.append('/home/rick/tiny-training/algorithm/core/utils')
+
 import torch
 import torch.nn as nn
 import numpy as np
 
-from ..core.utils.config import configs
-from ..quantize.quantized_ops_diff import ScaledLinear
+from config import configs
+from quantized_ops_diff import ScaledLinear
 
 def _append_flatten(model_q):
     model_q = list(model_q)
@@ -22,7 +26,7 @@ def create_scaled_head(model_q, norm_feat=False):
 
 
 def create_quantized_head(model_q):
-    from .quantized_ops_diff import QuantizedConv2dDiff
+    from quantized_ops_diff import QuantizedConv2dDiff
     assert isinstance(model_q, nn.Sequential)
     if not isinstance(model_q[-1], nn.Flatten):
         model_q = _append_flatten(model_q)
