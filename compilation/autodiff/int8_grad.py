@@ -1,6 +1,6 @@
 import sys
-sys.path.append('/home/rick/tiny-training/compilation/autodiff')
 
+sys.path.append('/home/rickleung/PycharmProjects/pythonProject/Tiny_ML_Temp/compilation/autodiff')
 
 import time
 from turtle import backward
@@ -37,6 +37,7 @@ from tvm.topi.nn.utils import get_pad_tuple
 from tvm.topi.utils import get_const_tuple
 
 from op2grad import register_gradient, GRAD_OP_MAP
+
 
 # from graph_tools.visualize_call import visualize_call, check_call_dtype, check_call_shape
 
@@ -147,7 +148,7 @@ def post_process_gradients(backward_data, backward_weight, eps=None):
         w_scales = relay.cast(w_scales, "float32")
         backward_data = backward_data / (x_scales + relay.const(1e-12, dtype="float32"))
         backward_weight = backward_weight / (
-            w_scales + relay.const(1e-12, dtype="float32")
+                w_scales + relay.const(1e-12, dtype="float32")
         )
     backward_data = relay.cast(backward_data, dtype="int8")
     backward_weight = relay.cast(backward_weight, dtype="int8")
@@ -251,11 +252,11 @@ def mcunetconv2d_int8_grad(orig, grad):
     # input()
     # infer shape of backward_weight
     padded_weight_grad_h = (
-        in_h - (grad_h - 1) * stride_h - 1 + fpad_top + fpad_bottom
-    ) // dilation_h + 1
+                                   in_h - (grad_h - 1) * stride_h - 1 + fpad_top + fpad_bottom
+                           ) // dilation_h + 1
     padded_weight_grad_w = (
-        in_w - (grad_w - 1) * stride_w - 1 + fpad_left + fpad_right
-    ) // dilation_w + 1
+                                   in_w - (grad_w - 1) * stride_w - 1 + fpad_left + fpad_right
+                           ) // dilation_w + 1
     backward_weight = reshape(
         backward_weight,
         [
@@ -413,11 +414,11 @@ def sparse_in_channel_mcunetconv2d_int8grad(orig, grad, topk=None):
 
     # infer shape of backward_weight
     padded_weight_grad_h = (
-        in_h - (grad_h - 1) * stride_h - 1 + fpad_top + fpad_bottom
-    ) // dilation_h + 1
+                                   in_h - (grad_h - 1) * stride_h - 1 + fpad_top + fpad_bottom
+                           ) // dilation_h + 1
     padded_weight_grad_w = (
-        in_w - (grad_w - 1) * stride_w - 1 + fpad_left + fpad_right
-    ) // dilation_w + 1
+                                   in_w - (grad_w - 1) * stride_w - 1 + fpad_left + fpad_right
+                           ) // dilation_w + 1
     backward_weight = reshape(
         backward_weight,
         [
@@ -583,11 +584,11 @@ def sparse_depth_wise_mcunetconv2d_int8grad(orig, grad, topk=None):
 
     # infer shape of backward_weight
     padded_weight_grad_h = (
-        in_h - (grad_h - 1) * stride_h - 1 + fpad_top + fpad_bottom
-    ) // dilation_h + 1
+                                   in_h - (grad_h - 1) * stride_h - 1 + fpad_top + fpad_bottom
+                           ) // dilation_h + 1
     padded_weight_grad_w = (
-        in_w - (grad_w - 1) * stride_w - 1 + fpad_left + fpad_right
-    ) // dilation_w + 1
+                                   in_w - (grad_w - 1) * stride_w - 1 + fpad_left + fpad_right
+                           ) // dilation_w + 1
     backward_weight = reshape(
         backward_weight,
         [

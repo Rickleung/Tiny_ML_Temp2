@@ -1,7 +1,7 @@
 import sys
 
-sys.path.append('/home/rick/tiny-training/algorithm/quantize')
-sys.path.append('/home/rick/tiny-training/algorithm/core/utils')
+sys.path.append('/home/rickleung/PycharmProjects/pythonProject/Tiny_ML_Temp/algorithm/quantize')
+sys.path.append('/home/rickleung/PycharmProjects/pythonProject/Tiny_ML_Temp/algorithm/core/utils')
 
 import torch
 import torch.nn.functional as F

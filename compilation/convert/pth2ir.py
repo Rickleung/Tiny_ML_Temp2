@@ -2,9 +2,9 @@ from logging import warning
 import torch
 
 import sys
-sys.path.append('/home/rick/tiny-training/compilation/autodiff')
-sys.path.append('/home/rick/tiny-training/compilation/ir_utils')
-sys.path.append('/home/rick/tiny-training/compilation/convert')
+sys.path.append('/home/rickleung/PycharmProjects/pythonProject/Tiny_ML_Temp/compilation/autodiff')
+sys.path.append('/home/rickleung/PycharmProjects/pythonProject/Tiny_ML_Temp/compilation/ir_utils')
+sys.path.append('/home/rickleung/PycharmProjects/pythonProject/Tiny_ML_Temp/compilation/convert')
 
 import tvm
 from tvm import relay

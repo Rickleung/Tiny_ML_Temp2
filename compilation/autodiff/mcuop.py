@@ -211,12 +211,15 @@ def mcuadd_factory(num1, num2, out_channels=3, prefix="", param_dtype="int8"):
 def extract_mcuconv2d_params(module, args, param_dtype="int8"):
     params = {}
     # weight
+    print("weight", module.weight) #print weight
     vname = args[0].name_hint
     vtensor = module.weight.detach().numpy().astype(param_dtype)
     params[vname] = tvm.nd.array(vtensor)
 
     # bias
     vname = args[1].name_hint
+    print("Module_bias:", module.bias)  # print tensor object
+    #print(module.bias.detach().numpy())  # print numpy array equivalent
     vtensor = module.bias.detach().numpy().astype("int32")
     params[vname] = tvm.nd.array(vtensor)
 

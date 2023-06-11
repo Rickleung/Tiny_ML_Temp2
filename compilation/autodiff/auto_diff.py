@@ -1,6 +1,6 @@
 import sys
-sys.path.append('/home/rick/tiny-training/compilation/autodiff')
-sys.path.append('/home/rick/tiny-training/compilation')
+sys.path.append('/home/rickleung/PycharmProjects/pythonProject/Tiny_ML_Temp/compilation/autodiff')
+sys.path.append('/home/rickleung/PycharmProjects/pythonProject/Tiny_ML_Temp/compilation')
 
 
 import enum

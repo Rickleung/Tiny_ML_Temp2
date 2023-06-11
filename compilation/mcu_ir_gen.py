@@ -2,7 +2,7 @@ import os
 import os.path as osp
 import json
 import sys
-sys.path.append('/home/rick/tiny-training/compilation')
+sys.path.append('/home/rickleung/PycharmProjects/pythonProject/Tiny_ML_Temp/compilation')
 
 from convert import (
     build_quantized_mcunet,
@@ -24,19 +24,38 @@ if model_name == "mbv2":
     model, _ = build_quantized_mbv2(num_classes=num_classes)
     sparse_update_config = {
         "49kb": {
-            'enable_backward_config': 1, 'n_bias_update': 16, 'n_weight_update': 0, 'weight_update_ratio': [1, 1, 0, 0.25, 0.125, 0.125, 0.125, 0.125], 'manual_weight_idx': [36, 39, 40, 41, 42, 45, 48, 49], 'weight_select_criteria': 'magnitude+', 'pw1_weight_only': 0
+            'enable_backward_config': 1, 'n_bias_update': 16, 'n_weight_update': 0, 'weight_update_ratio': [1, 1, 0,
+                                                                                                            0.25, 0.125,
+                                                                                                            0.125,
+                                                                                                            0.125,
+                                                                                                            0.125],
+            'manual_weight_idx': [36, 39, 40, 41, 42, 45, 48, 49], 'weight_select_criteria': 'magnitude+',
+            'pw1_weight_only': 0
         },
         "73kb": {
-            'enable_backward_config': 1, 'n_bias_update': 20, 'n_weight_update': 0, 'weight_update_ratio': [0.125, 0.5, 0.5, 1, 0.25, 0.125, 0.125, 1], 'manual_weight_idx': [32, 33, 36, 39, 41, 42, 45, 48], 'weight_select_criteria': 'magnitude+', 'pw1_weight_only': 0
+            'enable_backward_config': 1, 'n_bias_update': 20, 'n_weight_update': 0, 'weight_update_ratio': [0.125, 0.5,
+                                                                                                            0.5, 1,
+                                                                                                            0.25,
+                                                                                                            0.125,
+                                                                                                            0.125, 1],
+            'manual_weight_idx': [32, 33, 36, 39, 41, 42, 45, 48], 'weight_select_criteria': 'magnitude+',
+            'pw1_weight_only': 0
         },
         "99kb": {
-            'enable_backward_config': 1, 'n_bias_update': 25, 'n_weight_update': 0, 'weight_update_ratio': [1, 1, 1, 1, 1, 0.125, 0.5, 1], 'manual_weight_idx': [27, 30, 33, 36, 39, 42, 45, 48], 'weight_select_criteria': 'magnitude+', 'pw1_weight_only': 0,
+            'enable_backward_config': 1, 'n_bias_update': 25, 'n_weight_update': 0,
+            'weight_update_ratio': [1, 1, 1, 1, 1, 0.125, 0.5, 1],
+            'manual_weight_idx': [27, 30, 33, 36, 39, 42, 45, 48], 'weight_select_criteria': 'magnitude+',
+            'pw1_weight_only': 0,
         },
         "123kb": {
-            'enable_backward_config': 1, 'n_bias_update': 31, 'n_weight_update': 0, 'weight_update_ratio': [1, 1, 1, 1, 1, 0.5, 1, 1], 'manual_weight_idx': [27, 30, 33, 36, 39, 42, 45, 48], 'weight_select_criteria': 'magnitude+', 'pw1_weight_only': 0,
+            'enable_backward_config': 1, 'n_bias_update': 31, 'n_weight_update': 0,
+            'weight_update_ratio': [1, 1, 1, 1, 1, 0.5, 1, 1], 'manual_weight_idx': [27, 30, 33, 36, 39, 42, 45, 48],
+            'weight_select_criteria': 'magnitude+', 'pw1_weight_only': 0,
         },
         "138kb": {
-            'enable_backward_config': 1, 'n_bias_update': 34, 'n_weight_update': 0, 'weight_update_ratio': [1, 1, 1, 1, 1, 1, 1, 1], 'manual_weight_idx': [27, 30, 33, 36, 39, 42, 45, 48], 'weight_select_criteria': 'magnitude+', 'pw1_weight_only': 0,
+            'enable_backward_config': 1, 'n_bias_update': 34, 'n_weight_update': 0,
+            'weight_update_ratio': [1, 1, 1, 1, 1, 1, 1, 1], 'manual_weight_idx': [27, 30, 33, 36, 39, 42, 45, 48],
+            'weight_select_criteria': 'magnitude+', 'pw1_weight_only': 0,
         }
     }
 elif model_name == "mcunet":
@@ -44,19 +63,29 @@ elif model_name == "mcunet":
     model, _ = build_quantized_mcunet(num_classes=num_classes)
     sparse_update_config = {
         "49kb": {
-            "enable_backward_config": 1, "n_bias_update": 20, "n_weight_update": 0, "weight_update_ratio": [0, 0.25, 0.5, 0.5, 0, 0], "manual_weight_idx": [23, 24, 27, 30, 33, 39], "weight_select_criteria": "magnitude+", "pw1_weight_only": 0,
+            "enable_backward_config": 1, "n_bias_update": 20, "n_weight_update": 0,
+            "weight_update_ratio": [0, 0.25, 0.5, 0.5, 0, 0], "manual_weight_idx": [23, 24, 27, 30, 33, 39],
+            "weight_select_criteria": "magnitude+", "pw1_weight_only": 0,
         },
         "74kb": {
-            'enable_backward_config': 1, 'n_bias_update': 21, 'n_weight_update': 0, 'weight_update_ratio': [1, 0, 1, 0, 0.5, 1], 'manual_weight_idx': [21, 23, 24, 26, 27, 30], 'weight_select_criteria': 'magnitude+', 'pw1_weight_only': 0
+            'enable_backward_config': 1, 'n_bias_update': 21, 'n_weight_update': 0,
+            'weight_update_ratio': [1, 0, 1, 0, 0.5, 1], 'manual_weight_idx': [21, 23, 24, 26, 27, 30],
+            'weight_select_criteria': 'magnitude+', 'pw1_weight_only': 0
         },
         "99kb": {
-            'enable_backward_config': 1, 'n_bias_update': 22, 'n_weight_update': 0, 'weight_update_ratio': [1, 1, 1, 1, 0.125, 0.25], 'manual_weight_idx': [21, 24, 27, 30, 36, 39], 'weight_select_criteria': 'magnitude+', 'pw1_weight_only': 0
+            'enable_backward_config': 1, 'n_bias_update': 22, 'n_weight_update': 0,
+            'weight_update_ratio': [1, 1, 1, 1, 0.125, 0.25], 'manual_weight_idx': [21, 24, 27, 30, 36, 39],
+            'weight_select_criteria': 'magnitude+', 'pw1_weight_only': 0
         },
         "124kb": {
-            'enable_backward_config': 1, 'n_bias_update': 24, 'n_weight_update': 0, 'weight_update_ratio': [0.25, 1, 1, 1, 0.5, 0.5], 'manual_weight_idx': [21, 24, 27, 30, 33, 39], 'weight_select_criteria': 'magnitude+', 'pw1_weight_only': 0
+            'enable_backward_config': 1, 'n_bias_update': 24, 'n_weight_update': 0,
+            'weight_update_ratio': [0.25, 1, 1, 1, 0.5, 0.5], 'manual_weight_idx': [21, 24, 27, 30, 33, 39],
+            'weight_select_criteria': 'magnitude+', 'pw1_weight_only': 0
         },
         "148kb": {
-            'enable_backward_config': 1, 'n_bias_update': 23, 'n_weight_update': 0, 'weight_update_ratio': [1, 1, 1, 1, 1, 0.5], 'manual_weight_idx': [21, 24, 27, 30, 36, 39], 'weight_select_criteria': 'magnitude+', 'pw1_weight_only': 0
+            'enable_backward_config': 1, 'n_bias_update': 23, 'n_weight_update': 0,
+            'weight_update_ratio': [1, 1, 1, 1, 1, 0.5], 'manual_weight_idx': [21, 24, 27, 30, 36, 39],
+            'weight_select_criteria': 'magnitude+', 'pw1_weight_only': 0
         }
     }
 elif model_name == "proxyless":
@@ -64,19 +93,32 @@ elif model_name == "proxyless":
     model, _ = build_quantized_proxyless(num_classes=num_classes)
     sparse_update_config = {
         "49kb": {
-            'enable_backward_config': 1, 'n_bias_update': 21, 'n_weight_update': 0, 'weight_update_ratio': [0.25, 1, 0, 1, 0, 0.125, 0.25, 0.25], 'manual_weight_idx': [39, 42, 44, 45, 50, 51, 54, 57], 'weight_select_criteria': 'magnitude+', 'pw1_weight_only': 0
+            'enable_backward_config': 1, 'n_bias_update': 21, 'n_weight_update': 0,
+            'weight_update_ratio': [0.25, 1, 0, 1, 0, 0.125, 0.25, 0.25],
+            'manual_weight_idx': [39, 42, 44, 45, 50, 51, 54, 57],
+            'weight_select_criteria': 'magnitude+', 'pw1_weight_only': 0
         },
         "74kb": {
-            'enable_backward_config': 1, 'n_bias_update': 28, 'n_weight_update': 0, 'weight_update_ratio': [0.5, 0.25, 1, 1, 1, 0.5, 0.25, 0.5], 'manual_weight_idx': [33, 36, 39, 42, 45, 51, 54, 57], 'weight_select_criteria': 'magnitude+', 'pw1_weight_only': 0
+            'enable_backward_config': 1, 'n_bias_update': 28, 'n_weight_update': 0,
+            'weight_update_ratio': [0.5, 0.25, 1, 1, 1, 0.5, 0.25, 0.5],
+            'manual_weight_idx': [33, 36, 39, 42, 45, 51, 54, 57],
+            'weight_select_criteria': 'magnitude+', 'pw1_weight_only': 0
         },
         "98kb": {
-            'enable_backward_config': 1, 'n_bias_update': 25, 'n_weight_update': 0, 'weight_update_ratio': [1, 0.5, 1, 1, 0.25, 0.5, 1, 1], 'manual_weight_idx': [36, 39, 42, 45, 48, 51, 54, 57], 'weight_select_criteria': 'magnitude+', 'pw1_weight_only': 0
+            'enable_backward_config': 1, 'n_bias_update': 25, 'n_weight_update': 0,
+            'weight_update_ratio': [1, 0.5, 1, 1, 0.25, 0.5, 1, 1],
+            'manual_weight_idx': [36, 39, 42, 45, 48, 51, 54, 57],
+            'weight_select_criteria': 'magnitude+', 'pw1_weight_only': 0
         },
         "120kb": {
-            'enable_backward_config': 1, 'n_bias_update': 32, 'n_weight_update': 0, 'weight_update_ratio': [1, 1, 1, 1, 0.5, 1, 1, 1], 'manual_weight_idx': [36, 39, 42, 45, 48, 51, 54, 57], 'weight_select_criteria': 'magnitude+', 'pw1_weight_only': 0
+            'enable_backward_config': 1, 'n_bias_update': 32, 'n_weight_update': 0,
+            'weight_update_ratio': [1, 1, 1, 1, 0.5, 1, 1, 1], 'manual_weight_idx': [36, 39, 42, 45, 48, 51, 54, 57],
+            'weight_select_criteria': 'magnitude+', 'pw1_weight_only': 0
         },
         "148kb": {
-            'enable_backward_config': 1, 'n_bias_update': 45, 'n_weight_update': 0, 'weight_update_ratio': [1, 1, 1, 1, 1, 1, 1, 1], 'manual_weight_idx': [36, 39, 42, 45, 48, 51, 54, 57], 'weight_select_criteria': 'magnitude+', 'pw1_weight_only': 0
+            'enable_backward_config': 1, 'n_bias_update': 45, 'n_weight_update': 0,
+            'weight_update_ratio': [1, 1, 1, 1, 1, 1, 1, 1], 'manual_weight_idx': [36, 39, 42, 45, 48, 51, 54, 57],
+            'weight_select_criteria': 'magnitude+', 'pw1_weight_only': 0
         }
     }
 fwd_mod, real_params, scale_params, op_idx = pth_model_to_ir(model, input_res=[1, 3, rs, rs], num_classes=num_classes)
@@ -109,7 +151,7 @@ class ExtractMetaConstants(ExprMutator):
             value = np_data.item()
             #TODO: inherit value dtype
             new_const = relay.const(value, dtype=str(np_data.dtype))
-        print(new_const)
+        print("New_Const", new_const)
         # input()
         if "meta" in str(const):
             self.constants.append(np_data)

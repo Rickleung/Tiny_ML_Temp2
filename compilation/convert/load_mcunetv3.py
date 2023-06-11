@@ -1,5 +1,6 @@
 import sys
-sys.path.append('/home/rick/tiny-training/compilation/convert')
+
+sys.path.append('/home/rickleung/PycharmProjects/pythonProject/Tiny_ML_Temp/compilation/convert')
 import os, sys, os.path as osp
 import functools
 import torch
@@ -21,8 +22,8 @@ from mcunetv3_wrapper import (
 
 
 def build_quantized_model(net_name="mbv2-w0.35", num_classes=10):
-    load_config_from_file("/home/rick/tiny-training/algorithm/configs/transfer.yaml")
-    configs["net_config"]["net_name"] = net_name # "mbv2-w0.35"
+    load_config_from_file("/home/rickleung/PycharmProjects/pythonProject/Tiny_ML_Temp/algorithm/configs/transfer.yaml")
+    configs["net_config"]["net_name"] = net_name  # "mbv2-w0.35"
     configs["net_config"]["mcu_head_type"] = "quantized"
 
     subnet = build_mcu_model()

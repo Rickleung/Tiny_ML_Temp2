@@ -1,7 +1,7 @@
 import sys
-sys.path.append('/home/rick/tiny-training/compilation/autodiff')
-sys.path.append('/home/rick/tiny-training/compilation')
-sys.path.append('/home/rick/tiny-training/compilation/convert')
+sys.path.append('/home/rickleung/PycharmProjects/pythonProject/Tiny_ML_Temp/compilation/autodiff')
+sys.path.append('/home/rickleung/PycharmProjects/pythonProject/Tiny_ML_Temp/compilation')
+sys.path.append('/home/rickleung/PycharmProjects/pythonProject/Tiny_ML_Temp/compilation/convert')
 import os, os.path as osp
 from copy import deepcopy
 import json

@@ -1,6 +1,6 @@
 import os, os.path as osp
 import json
-
+import sys
 import warnings
 import numpy as np
 
@@ -11,15 +11,18 @@ import torch.nn.functional as F
 import tvm
 from tvm import relay
 
-from compilation.mod import mod_load, mod_save, ComputeDAG
-from compilation.utils import from_pytorch
-from compilation.serialize import SerializeVisitor
+sys.path.append('/home/rickleung/PycharmProjects/pythonProject/Tiny_ML_Temp/compilation')
+
+from mod import mod_load, mod_save, ComputeDAG
+from utils import from_pytorch
+from serialize import SerializeVisitor
+
 
 def translate_pth_net(
-    net,
-    name="SampleNet",
-    input_shape=(1, 3, 32, 32),
-    requires_grad=["2_weight", "2_bias"],
+        net,
+        name="SampleNet",
+        input_shape=(1, 3, 32, 32),
+        requires_grad=["2_weight", "2_bias"],
 ):
     input_data = torch.randn(input_shape)
     input_name = "input0"
@@ -42,9 +45,9 @@ def test_translate_pytorch():
 
 
 def translate_ir(
-    path="example/SampleNet.ir",
-    name=None,
-    out_folder=".model/testproj"
+        path="example/SampleNet.ir",
+        name=None,
+        out_folder=".model/testproj"
 ):
     folder = osp.dirname(path)
     file = osp.basename(path)
@@ -53,10 +56,10 @@ def translate_ir(
         mod, params = mod_load(folder, mod_name=file, meta=file.replace(".ir", ".pkl"))
     else:
         mod, params = mod_load(folder, mod_name=file)
-    
+
     if name is None:
         name = file.split(".")[0]
-    
+
     meta_path = osp.join(path.replace(".ir", ".meta"))
     meta_info = None
     if osp.exists(meta_path):
@@ -66,13 +69,13 @@ def translate_ir(
     mod = relay.transform.InferType()(mod)
     # print(meta_info)
     # print(type(params), params.keys())
-    
+
     if params is None:
         new_params = None
     else:
         new_params = {}
         for k, v in params.items():
-            n = k 
+            n = k
             if k[0].isdigit():
                 n = "v" + k
             new_params[n] = params[k]
@@ -80,12 +83,12 @@ def translate_ir(
 
 
 def translate_mod(
-    mod,
-    params=None,
-    name="example",
-    meta=None,
-    out_folder=".model/testproj",
-    dump_to_file = True
+        mod,
+        params=None,
+        name="example",
+        meta=None,
+        out_folder=".model/testproj",
+        dump_to_file=True
 ):
     import json, pickle
     from pprint import pprint
@@ -104,6 +107,7 @@ def translate_mod(
         print(f"Successfully export to {out_folder}")
     return ev.graph, ev.params, str(mod["main"])
 
+
 if __name__ == "__main__":
     import os, sys
 
@@ -115,7 +119,7 @@ if __name__ == "__main__":
 
     assert osp.exists(mod_path), f"{mod_path} does not exists."
     param_path = osp.join(osp.dirname(mod_path), "weights.param")
-    translate_ir(path=mod_path , out_folder=".model/testproj")
+    translate_ir(path=mod_path, out_folder=".model/testproj")
 
     # mod, params = mod_load("./", mod_name=mod_path)
     # meta = osp.join(mod_path.replace(".ir", ".meta"))

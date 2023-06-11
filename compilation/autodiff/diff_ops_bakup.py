@@ -1,5 +1,5 @@
 import sys
-sys.path.append('/home/rick/tiny-training/compilation/autodiff')
+sys.path.append('/home/rickleung/PycharmProjects/pythonProject/Tiny_ML_Temp/compilation/autodiff')
 
 from tvm.topi.nn.utils import get_pad_tuple
 from tvm.topi.utils import get_const_tuple

@@ -1,5 +1,5 @@
 import sys
-sys.path.append('/home/rick/tiny-training/compilation/autodiff')
+sys.path.append('/home/rickleung/PycharmProjects/pythonProject/Tiny_ML_Temp/compilation/autodiff')
 
 from pprint import pprint
 from pydoc import visiblename

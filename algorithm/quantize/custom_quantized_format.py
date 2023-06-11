@@ -5,7 +5,8 @@ and also the method to build simulated quantized models from the pickle file
 """
 
 import sys
-sys.path.append('/home/rick/tiny-training/algorithm/quantize')
+
+sys.path.append('/home/rickleung/PycharmProjects/pythonProject/Tiny_ML_Temp/algorithm/quantize')
 import torch
 import torch.nn as nn
 import numpy as np
